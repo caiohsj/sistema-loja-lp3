@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifms.loja.cliente.bo;
+package br.edu.ifms.loja.fornecedor.bo;
 
 import br.edu.ifms.loja.cidade.dao.CidadeDAO;
 import br.edu.ifms.loja.cidade.datamodel.Cidade;
-import br.edu.ifms.loja.cliente.dao.ClienteDAO;
-import br.edu.ifms.loja.cliente.datamodel.Cliente;
+import br.edu.ifms.loja.fonecedor.dao.FornecedorDAO;
+import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
 import br.edu.ifms.loja.uf.dao.UfDAO;
 import br.edu.ifms.loja.uf.datamodel.Uf;
 import java.util.ArrayList;
@@ -19,36 +19,40 @@ import maruyama.components.mvc.GenericCRUDModel;
  *
  * @author Caio
  */
-public class ClienteBO extends GenericCRUDModel<Cliente> {
-    private ClienteDAO dao;
+public class FornecedorBO extends GenericCRUDModel<Fornecedor> {
+    private FornecedorDAO dao;
     private CidadeDAO cidadeDao;
     private UfDAO ufDao;
 
-    public ClienteBO() {
-        dao = new ClienteDAO();
+    public FornecedorBO() {
+        dao = new FornecedorDAO();
         cidadeDao = new CidadeDAO();
         ufDao = new UfDAO();
         preencherLista(dao.listarTodos());
     }
 
     @Override
-    public void salvarEmBaseDeDados(Cliente t) {
+    public void salvarEmBaseDeDados(Fornecedor t) {
         dao.persistir(t);
     }
 
     @Override
-    public void removerEmBaseDeDados(Cliente t) {
+    public void removerEmBaseDeDados(Fornecedor t) {
         dao.remover(t);
     }
 
     @Override
-    public List<Cliente> carregarLista() {
+    public List<Fornecedor> carregarLista() {
         return dao.listarTodos();
     }
 
     @Override
-    public List<Cliente> buscar(String string, String string1) {
-        return new ArrayList<Cliente>();
+    public List<Fornecedor> buscar(String string, String string1) {
+        return new ArrayList<Fornecedor>();
+    }
+    
+    public List<Cidade> listarCidades() {
+        return cidadeDao.listarTodos();
     }
     
     public List<Uf> listarUfs() {

@@ -13,6 +13,14 @@ import br.edu.ifms.loja.cliente.bo.ClienteBO;
 import br.edu.ifms.loja.cliente.bo.ClienteController;
 import br.edu.ifms.loja.cliente.view.ClienteView;
 import br.edu.ifms.loja.cliente.view.FormCliente;
+import br.edu.ifms.loja.fornecedor.bo.FornecedorBO;
+import br.edu.ifms.loja.fornecedor.bo.FornecedorController;
+import br.edu.ifms.loja.fornecedor.view.FormFornecedor;
+import br.edu.ifms.loja.fornecedor.view.FornecedorView;
+import br.edu.ifms.loja.produto.bo.ProdutoBO;
+import br.edu.ifms.loja.produto.bo.ProdutoController;
+import br.edu.ifms.loja.produto.view.FormProduto;
+import br.edu.ifms.loja.produto.view.ProdutoView;
 import br.edu.ifms.loja.uf.bo.UfBO;
 import br.edu.ifms.loja.uf.bo.UfController;
 import br.edu.ifms.loja.uf.view.FormUf;
@@ -97,6 +105,11 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         botaoProdutos.setText("Produtos");
         botaoProdutos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoProdutos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoProdutosActionPerformed(evt);
+            }
+        });
 
         botaoClientes.setText("Clientes");
         botaoClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -188,7 +201,11 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoClientesActionPerformed
 
     private void botaoFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFornecedoresActionPerformed
-        
+        FornecedorBO model = new FornecedorBO();
+        FormFornecedor form = new FormFornecedor();
+        FornecedorView view = new FornecedorView(form);
+        FornecedorController controller = new FornecedorController(model, view);
+        view.setVisible(true);
     }//GEN-LAST:event_botaoFornecedoresActionPerformed
 
     private void botaoUFsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUFsActionPerformed
@@ -206,6 +223,14 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         CidadeController controller = new CidadeController(model, view);
         view.setVisible(true);
     }//GEN-LAST:event_botaoCidadesActionPerformed
+
+    private void botaoProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProdutosActionPerformed
+        ProdutoBO model = new ProdutoBO();
+        FormProduto form = new FormProduto();
+        ProdutoView view = new ProdutoView(form);
+        ProdutoController controller = new ProdutoController(model, view);
+        view.setVisible(true);
+    }//GEN-LAST:event_botaoProdutosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

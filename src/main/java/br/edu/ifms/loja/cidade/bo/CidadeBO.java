@@ -25,6 +25,7 @@ public class CidadeBO extends GenericCRUDModel<Cidade> {
     public CidadeBO() {
         dao = new CidadeDAO();
         ufDAO = new UfDAO();
+        preencherLista(dao.listarTodos());
     }
 
     public List<Uf> listarUfs() {

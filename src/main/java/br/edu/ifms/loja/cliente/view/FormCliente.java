@@ -6,6 +6,7 @@
 package br.edu.ifms.loja.cliente.view;
 
 import br.edu.ifms.loja.cidade.datamodel.Cidade;
+import br.edu.ifms.loja.uf.datamodel.Uf;
 import javax.swing.JComboBox;
 
 /**
@@ -32,12 +33,15 @@ public class FormCliente extends javax.swing.JPanel {
 
         campoNome = new javax.swing.JTextField();
         campoCpf = new javax.swing.JTextField();
+        try{javax.swing.text.MaskFormatter cpf = new javax.swing.text.MaskFormatter("###.###.###-##");campoCpf = new javax.swing.JFormattedTextField(cpf);}catch (Exception e){}
         campoEndereco = new javax.swing.JTextField();
         campoNumero = new javax.swing.JTextField();
         campoDataDeNascimento = new javax.swing.JTextField();
+        try{ javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####"); campoDataDeNascimento = new javax.swing.JFormattedTextField(data); } catch (Exception e){ }
         campoEmail = new javax.swing.JTextField();
         campoTelefone = new javax.swing.JTextField();
         campoCep = new javax.swing.JTextField();
+        try{javax.swing.text.MaskFormatter cep = new javax.swing.text.MaskFormatter("#####-###");campoCep = new javax.swing.JFormattedTextField(cep);}catch (Exception e){}
         comboCidade = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -48,10 +52,17 @@ public class FormCliente extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        comboUf = new javax.swing.JComboBox<>();
 
         campoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNomeActionPerformed(evt);
+            }
+        });
+
+        campoDataDeNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDataDeNascimentoActionPerformed(evt);
             }
         });
 
@@ -89,18 +100,23 @@ public class FormCliente extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(campoNome)
-                    .addComponent(campoCpf)
-                    .addComponent(campoEndereco)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoNumero)
                     .addComponent(campoDataDeNascimento)
                     .addComponent(campoEmail)
                     .addComponent(campoTelefone)
                     .addComponent(campoCep)
-                    .addComponent(comboCidade, 0, 206, Short.MAX_VALUE))
-                .addGap(84, 84, 84))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(campoCpf)
+                    .addComponent(campoEndereco)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(comboUf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +128,8 @@ public class FormCliente extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLabel1)
+                                    .addComponent(comboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,6 +172,10 @@ public class FormCliente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNomeActionPerformed
 
+    private void campoDataDeNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataDeNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDataDeNascimentoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campoCep;
@@ -166,6 +187,7 @@ public class FormCliente extends javax.swing.JPanel {
     private javax.swing.JTextField campoNumero;
     private javax.swing.JTextField campoTelefone;
     private javax.swing.JComboBox<Cidade> comboCidade;
+    private javax.swing.JComboBox<Uf> comboUf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,5 +233,9 @@ public class FormCliente extends javax.swing.JPanel {
 
     public JComboBox<Cidade> getComboCidade() {
         return comboCidade;
+    }
+
+    public javax.swing.JComboBox<Uf> getComboUf() {
+        return comboUf;
     }
 }

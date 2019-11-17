@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifms.loja.cliente.view;
+package br.edu.ifms.loja.fornecedor.view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,14 +13,14 @@ import maruyama.components.mvc.GenericCRUDView;
  *
  * @author Caio
  */
-public class ClienteView extends GenericCRUDView {
+public class FornecedorView extends GenericCRUDView {
     private JFrame janela;
 
-    public ClienteView(JPanel formulario) {
+    public FornecedorView(JPanel formulario) {
         super(formulario);
         janela = new JFrame();
         janela.setSize(700, 700);
-        janela.setTitle("Cliente");
+        janela.setTitle("Fornecedor");
         janela.add(this);
     }
 
@@ -32,5 +32,4 @@ public class ClienteView extends GenericCRUDView {
     public void setVisible(boolean b){
         janela.setVisible(b);
     }
-    
 }

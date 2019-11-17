@@ -7,6 +7,8 @@ package br.edu.ifms.loja.cidade.dao;
 
 import br.edu.ifms.loja.app.dao.GenericDAO;
 import br.edu.ifms.loja.cidade.datamodel.Cidade;
+import br.edu.ifms.loja.uf.datamodel.Uf;
+import java.util.List;
 
 /**
  *
@@ -16,6 +18,12 @@ public class CidadeDAO extends GenericDAO<Cidade>{
     
     public CidadeDAO() {
         super(Cidade.class);
+    }
+    
+    public List<Cidade> listarCidadesPorUf(Uf uf) {
+        return getEm().createQuery("SELECT c FROM Cidade c WHERE c.uf.id =:ufId")
+                .setParameter("ufId", uf.getId())
+                .getResultList();
     }
     
 }

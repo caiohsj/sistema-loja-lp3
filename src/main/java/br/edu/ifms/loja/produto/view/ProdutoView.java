@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifms.loja.cliente.view;
+package br.edu.ifms.loja.produto.view;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import maruyama.components.mvc.GenericCRUDView;
 
@@ -13,15 +13,17 @@ import maruyama.components.mvc.GenericCRUDView;
  *
  * @author Caio
  */
-public class ClienteView extends GenericCRUDView {
-    private JFrame janela;
+public class ProdutoView extends GenericCRUDView {
+    
+    private JDialog janela;
 
-    public ClienteView(JPanel formulario) {
+    public ProdutoView(JPanel formulario) {
         super(formulario);
-        janela = new JFrame();
-        janela.setSize(700, 700);
-        janela.setTitle("Cliente");
+        janela = new JDialog();
+        janela.setModal(true);
         janela.add(this);
+        janela.setSize(600, 500);
+        janela.setTitle("Produto");
     }
 
     @Override
@@ -29,8 +31,7 @@ public class ClienteView extends GenericCRUDView {
         return new String[0];
     }
     
-    public void setVisible(boolean b){
+    public void setVisible(boolean b) {
         janela.setVisible(b);
     }
-    
 }

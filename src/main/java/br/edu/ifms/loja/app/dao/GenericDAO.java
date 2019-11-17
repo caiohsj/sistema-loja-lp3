@@ -55,4 +55,8 @@ public abstract class GenericDAO<T> {
         query.append(" t");
         return em.createQuery(query.toString()).getResultList();
     }
+    
+    public EntityManager getEm() {
+        return em;
+    }
 }

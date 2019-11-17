@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifms.loja.cliente.bo;
+package br.edu.ifms.loja.fornecedor.bo;
 
 import br.edu.ifms.loja.cidade.datamodel.Cidade;
-import br.edu.ifms.loja.cliente.datamodel.Cliente;
-import br.edu.ifms.loja.cliente.view.ClienteView;
-import br.edu.ifms.loja.cliente.view.FormCliente;
+import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
+import br.edu.ifms.loja.fornecedor.view.FormFornecedor;
+import br.edu.ifms.loja.fornecedor.view.FornecedorView;
 import br.edu.ifms.loja.uf.datamodel.Uf;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import maruyama.components.mvc.GenericCRUDController;
 import maruyama.components.mvc.GenericCRUDModel;
@@ -24,27 +19,27 @@ import maruyama.components.mvc.GenericCRUDView;
  *
  * @author Caio
  */
-public class ClienteController extends GenericCRUDController<Cliente> {
-    private ClienteView view;
-    private ClienteBO model;
+public class FornecedorController extends GenericCRUDController<Fornecedor> {
+    private FornecedorView view;
+    private FornecedorBO model;
 
-    public ClienteController(GenericCRUDModel model, GenericCRUDView view) {
+    public FornecedorController(GenericCRUDModel model, GenericCRUDView view) {
         super(model, view);
-        this.view = (ClienteView) view;
-        this.model = (ClienteBO) model;
+        this.view = (FornecedorView) view;
+        this.model = (FornecedorBO) model;
         carregarComboBoxUf();
         inicializarAcoesComboBox();
     }
-
+    
     public void inicializarAcoesComboBox() {
-        FormCliente form = (FormCliente) view.getFormulario();
+        FormFornecedor form = (FormFornecedor) view.getFormulario();
         form.getComboUf().addActionListener((evt) -> {
             carregarCidades();
         });
     }
 
     public void carregarComboBoxUf() {
-        FormCliente form = (FormCliente) view.getFormulario();
+        FormFornecedor form = (FormFornecedor) view.getFormulario();
         form.getComboUf().removeAllItems();
         for (Uf uf : model.listarUfs()) {
             form.getComboUf().addItem(uf);
@@ -52,7 +47,7 @@ public class ClienteController extends GenericCRUDController<Cliente> {
     }
 
     public void carregarCidades() {
-        FormCliente form = (FormCliente) view.getFormulario();
+        FormFornecedor form = (FormFornecedor) view.getFormulario();
         Uf uf = (Uf) form.getComboUf().getSelectedItem();
         form.getComboCidade().removeAllItems();
         if (uf == null) {
@@ -64,40 +59,32 @@ public class ClienteController extends GenericCRUDController<Cliente> {
     }
 
     @Override
-    public void dadosViewParaModel(Cliente t, JPanel pnl) {
-        FormCliente form = (FormCliente) pnl;
-        t.setNome(form.getCampoNome().getText());
-        t.setEmail(form.getCampoEmail().getText());
+    public void dadosViewParaModel(Fornecedor t, JPanel pnl) {
+        FormFornecedor form = (FormFornecedor) pnl;
+        t.setNomeFantasia(form.getCampoNomeFantasia().getText());
+        t.setRazaoSocial(form.getCampoRazaoSocial().getText());
         t.setTelefone(form.getCampoTelefone().getText());
+        t.setEmail(form.getCampoEmail().getText());
         t.setEndereco(form.getCampoEndereco().getText());
         t.setNumero(Integer.parseInt(form.getCampoNumero().getText()));
-        t.setCpf(form.getCampoCpf().getText());
+        t.setCnpj(form.getCampoCnpj().getText());
         t.setCep(form.getCampoCep().getText());
         t.setCidade((Cidade) form.getComboCidade().getSelectedItem());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            Date dt = (Date) dateFormat.parse(form.getCampoDataDeNascimento().getText());
-            t.setDataNascimento(dt);
-        } catch (ParseException ex) {
-            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override
-    public void dadosModelParaView(Cliente t, JPanel pnl) {
-        FormCliente form = (FormCliente) pnl;
-        form.getCampoNome().setText(t.getNome());
-        form.getCampoEmail().setText(t.getEmail());
+    public void dadosModelParaView(Fornecedor t, JPanel pnl) {
+        FormFornecedor form = (FormFornecedor) pnl;
+        form.getCampoNomeFantasia().setText(t.getNomeFantasia());
+        form.getCampoRazaoSocial().setText(t.getRazaoSocial());
         form.getCampoTelefone().setText(t.getTelefone());
+        form.getCampoEmail().setText(t.getEmail());
         form.getCampoEndereco().setText(t.getEndereco());
         form.getCampoNumero().setText(String.valueOf(t.getNumero()));
-        form.getCampoCpf().setText(t.getCpf());
+        form.getCampoCnpj().setText(t.getCnpj());
         form.getCampoCep().setText(t.getCep());
-        form.getCampoNome().setText(t.getDataNascimento().toString());
         form.getComboUf().setSelectedItem(t.getCidade().getUf());
         form.getComboCidade().setSelectedItem(t.getCidade());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        form.getCampoDataDeNascimento().setText(dateFormat.format(t.getDataNascimento()));
     }
     
 }
