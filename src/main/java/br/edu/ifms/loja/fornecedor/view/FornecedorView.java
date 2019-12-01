@@ -26,7 +26,7 @@ public class FornecedorView extends GenericCRUDView {
 
     @Override
     public String[] configurarCamposDeBusca() {
-        return new String[0];
+        return new String[]{"Nome Fantasia", "Cidade", "UF", "ID"};
     }
     
     public void setVisible(boolean b){

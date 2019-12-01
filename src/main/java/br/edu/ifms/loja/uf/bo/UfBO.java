@@ -7,6 +7,7 @@ package br.edu.ifms.loja.uf.bo;
 
 import br.edu.ifms.loja.uf.dao.UfDAO;
 import br.edu.ifms.loja.uf.datamodel.Uf;
+import java.util.ArrayList;
 import java.util.List;
 import maruyama.components.mvc.GenericCRUDModel;
 
@@ -39,8 +40,16 @@ public class UfBO extends GenericCRUDModel<Uf>{
     }
 
     @Override
-    public List<Uf> buscar(String string, String string1) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-       return null;
+    public List<Uf> buscar(String campo, String valor) {
+       if (campo.equals("Nome")) {
+            return dao.buscarUfPorNome(valor);
+        }
+        if (campo.equals("Sigla")) {
+            return dao.buscarUfPorSigla(valor);
+        }
+        if (campo.equals("ID")) {
+            return dao.buscarUfPorId(valor);
+        }
+        return new ArrayList<Uf>();
     }  
 }

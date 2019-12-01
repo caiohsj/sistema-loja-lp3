@@ -28,7 +28,7 @@ public class CidadeView extends GenericCRUDView{
 
     @Override
     public String[] configurarCamposDeBusca() {
-        return new String[0];
+        return new String[]{"Nome","Sigla UF","ID"};
     }
  
     public void setVisible(boolean b){

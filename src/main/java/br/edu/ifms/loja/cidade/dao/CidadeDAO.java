@@ -25,5 +25,29 @@ public class CidadeDAO extends GenericDAO<Cidade>{
                 .setParameter("ufId", uf.getId())
                 .getResultList();
     }
+
+    public List<Cidade> buscarCidadePorNome(String valor) {
+        return getEm().createQuery("SELECT c FROM Cidade c WHERE UPPER(c.nome) LIKE :nome")
+                .setParameter("nome", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+
+    public List<Cidade> buscarCidadePorSiglaUf(String valor) {
+        return getEm().createQuery("SELECT c FROM Cidade c WHERE UPPER (c.uf.sigla) LIKE :sigla")
+                .setParameter("sigla", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+
+    public List<Cidade> buscarCidadePorId(String valor) {
+        Long id;
+        try {
+            id = new Long(valor);
+            return getEm().createQuery("SELECT c FROM Cidade c WHERE c.id =:id")
+                    .setParameter("id", id)
+                    .getResultList();
+        } catch (NumberFormatException ex) {
+            return listarTodos();
+        }
+    }
     
 }

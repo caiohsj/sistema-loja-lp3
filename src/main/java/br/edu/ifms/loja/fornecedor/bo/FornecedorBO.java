@@ -47,7 +47,19 @@ public class FornecedorBO extends GenericCRUDModel<Fornecedor> {
     }
 
     @Override
-    public List<Fornecedor> buscar(String string, String string1) {
+    public List<Fornecedor> buscar(String campo, String valor) {
+        if (campo.equals("Nome Fantasia")) {
+            return dao.buscarFornecedorPorNomeFantasia(valor);
+        }
+        if (campo.equals("Cidade")) {
+            return dao.buscarFornecedorPorNomeCidade(valor);
+        }
+        if (campo.equals("UF")) {
+            return dao.buscarFornecedoresPorNomeUf(valor);
+        }
+        if (campo.equals("ID")) {
+            return dao.buscarFornecedorPorId(valor);
+        }
         return new ArrayList<Fornecedor>();
     }
     

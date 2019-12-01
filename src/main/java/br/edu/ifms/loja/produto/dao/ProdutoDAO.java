@@ -20,4 +20,40 @@ public class ProdutoDAO extends GenericDAO<Produto> {
     public ProdutoDAO() {
         super(Produto.class);
     }
+    
+     public List<Produto> buscarProdutoPorDescricao(String valor) {
+        return getEm().createQuery("SELECT p FROM Produto p WHERE UPPER(p.descricao) LIKE :descricao")
+                .setParameter("descricao", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+
+    public List<Produto> buscarProdutoPorMarca(String valor) {
+        return getEm().createQuery("SELECT p FROM Produto p WHERE UPPER (p.marca) LIKE :marca")
+                .setParameter("marca", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+    
+    public List<Produto> buscarProdutoPorModelo(String valor) {
+        return getEm().createQuery("SELECT p FROM Produto p WHERE UPPER (p.modelo) LIKE :modelo")
+                .setParameter("modelo", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+    
+    public List<Produto> buscarProdutoPorNomeFantasiaFornecedor(String valor) {
+        return getEm().createQuery("SELECT p FROM Produto p WHERE UPPER (p.fornecedor.nomeFantasia) LIKE :nomeFantasia")
+                .setParameter("nomeFantasia", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+
+    public List<Produto> buscarProdutoPorId(String valor) {
+        Long id;
+        try {
+            id = new Long(valor);
+            return getEm().createQuery("SELECT p FROM Produto p WHERE p.id =:id")
+                    .setParameter("id", id)
+                    .getResultList();
+        } catch (NumberFormatException ex) {
+            return listarTodos();
+        }
+    }
 }

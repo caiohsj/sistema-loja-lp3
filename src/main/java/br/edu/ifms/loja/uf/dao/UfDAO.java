@@ -7,6 +7,7 @@ package br.edu.ifms.loja.uf.dao;
 
 import br.edu.ifms.loja.app.dao.GenericDAO;
 import br.edu.ifms.loja.uf.datamodel.Uf;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,30 @@ public class UfDAO extends GenericDAO<Uf> {
 
     public UfDAO() {
         super(Uf.class);
+    }
+    
+    public List<Uf> buscarUfPorNome(String valor) {
+        return getEm().createQuery("SELECT u FROM Uf u WHERE UPPER(u.nome) LIKE :nome")
+                .setParameter("nome", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+
+    public List<Uf> buscarUfPorSigla(String valor) {
+        return getEm().createQuery("SELECT u FROM Uf u WHERE UPPER (u.sigla) LIKE :sigla")
+                .setParameter("sigla", "%" + valor.toUpperCase() + "%")
+                .getResultList();
+    }
+
+    public List<Uf> buscarUfPorId(String valor) {
+        Long id;
+        try {
+            id = new Long(valor);
+            return getEm().createQuery("SELECT u FROM Uf u WHERE u.id =:id")
+                    .setParameter("id", id)
+                    .getResultList();
+        } catch (NumberFormatException ex) {
+            return listarTodos();
+        }
     }
 
 }

@@ -43,7 +43,22 @@ public class ProdutoBO extends GenericCRUDModel<Produto> {
     }
 
     @Override
-    public List<Produto> buscar(String arg0, String arg1) {
+    public List<Produto> buscar(String campo, String valor) {
+        if (campo.equals("Descrição")) {
+            return dao.buscarProdutoPorDescricao(valor);
+        }
+        if (campo.equals("Marca")) {
+            return dao.buscarProdutoPorMarca(valor);
+        }
+        if (campo.equals("Modelo")) {
+            return dao.buscarProdutoPorModelo(valor);
+        }
+        if (campo.equals("Fornecedor")) {
+            return dao.buscarProdutoPorNomeFantasiaFornecedor(valor);
+        }
+        if (campo.equals("ID")) {
+            return dao.buscarProdutoPorId(valor);
+        }
         return new ArrayList<Produto>();
     }
     

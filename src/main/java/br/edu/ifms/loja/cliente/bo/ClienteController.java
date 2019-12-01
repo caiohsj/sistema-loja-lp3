@@ -10,15 +10,19 @@ import br.edu.ifms.loja.cliente.datamodel.Cliente;
 import br.edu.ifms.loja.cliente.view.ClienteView;
 import br.edu.ifms.loja.cliente.view.FormCliente;
 import br.edu.ifms.loja.uf.datamodel.Uf;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import maruyama.components.mvc.GenericCRUDController;
 import maruyama.components.mvc.GenericCRUDModel;
 import maruyama.components.mvc.GenericCRUDView;
+import maruyama.components.swing.ObjectTableModel;
 
 /**
  *
@@ -34,6 +38,30 @@ public class ClienteController extends GenericCRUDController<Cliente> {
         this.model = (ClienteBO) model;
         carregarComboBoxUf();
         inicializarAcoesComboBox();
+        inicializarAcoesDeBusca(view, (ClienteBO) model);
+    }
+    
+    public void inicializarAcoesDeBusca(GenericCRUDView view, ClienteBO model) {
+        view.getCampoBusca().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String campo = (String) view.getComboBoxAtributoDeBusca().getSelectedItem();
+                String valor = view.getCampoBusca().getText();
+                List<Cliente> lista = model.buscar(campo, valor);
+                ObjectTableModel tableModel = new ObjectTableModel(Cliente.class, lista);
+                view.getTabela().setModel(tableModel);
+            }
+        });
     }
 
     public void inicializarAcoesComboBox() {

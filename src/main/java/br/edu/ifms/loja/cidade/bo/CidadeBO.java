@@ -48,7 +48,16 @@ public class CidadeBO extends GenericCRUDModel<Cidade> {
     }
 
     @Override
-    public List<Cidade> buscar(String string, String string1) {
+    public List<Cidade> buscar(String campo, String valor) {
+        if (campo.equals("Nome")) {
+            return dao.buscarCidadePorNome(valor);
+        }
+        if (campo.equals("Sigla UF")) {
+            return dao.buscarCidadePorSiglaUf(valor);
+        }
+        if (campo.equals("ID")) {
+            return dao.buscarCidadePorId(valor);
+        }
         return new ArrayList<Cidade>();
     }
 

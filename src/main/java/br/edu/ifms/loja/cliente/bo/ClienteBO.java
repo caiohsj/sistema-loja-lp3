@@ -47,7 +47,19 @@ public class ClienteBO extends GenericCRUDModel<Cliente> {
     }
 
     @Override
-    public List<Cliente> buscar(String string, String string1) {
+    public List<Cliente> buscar(String campo, String valor) {
+        if (campo.equals("Nome")) {
+            return dao.buscarClientePorNome(valor);
+        }
+        if (campo.equals("CPF")) {
+            return dao.buscarClientePorCpf(valor);
+        }
+        if (campo.equals("Cidade")) {
+            return dao.buscarClientePorCidade(valor);
+        }
+        if (campo.equals("ID")) {
+            return dao.buscarClientePorId(valor);
+        }
         return new ArrayList<Cliente>();
     }
     

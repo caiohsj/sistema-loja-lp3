@@ -29,8 +29,7 @@ public class UfView extends GenericCRUDView {
 
     @Override
     public String[] configurarCamposDeBusca() {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return new String[0];
+        return new String[]{"Nome", "Sigla", "ID"};
     }
 
     public void setVisible(boolean b) {

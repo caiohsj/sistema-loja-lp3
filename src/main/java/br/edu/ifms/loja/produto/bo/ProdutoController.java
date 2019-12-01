@@ -8,10 +8,14 @@ package br.edu.ifms.loja.produto.bo;
 import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
 import br.edu.ifms.loja.produto.datamodel.Produto;
 import br.edu.ifms.loja.produto.view.FormProduto;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.List;
 import javax.swing.JPanel;
 import maruyama.components.mvc.GenericCRUDController;
 import maruyama.components.mvc.GenericCRUDModel;
 import maruyama.components.mvc.GenericCRUDView;
+import maruyama.components.swing.ObjectTableModel;
 
 /**
  *
@@ -22,6 +26,30 @@ public class ProdutoController extends GenericCRUDController<Produto>{
     public ProdutoController(GenericCRUDModel model, GenericCRUDView view) {
         super(model, view);
         carregarComboBoxFornecedor(view, (ProdutoBO) model);
+        inicializarAcoesDeBusca(view, (ProdutoBO) model);
+    }
+    
+    public void inicializarAcoesDeBusca(GenericCRUDView view, ProdutoBO model) {
+        view.getCampoBusca().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String campo = (String) view.getComboBoxAtributoDeBusca().getSelectedItem();
+                String valor = view.getCampoBusca().getText();
+                List<Produto> lista = model.buscar(campo, valor);
+                ObjectTableModel tableModel = new ObjectTableModel(Produto.class, lista);
+                view.getTabela().setModel(tableModel);
+            }
+        });
     }
     
 

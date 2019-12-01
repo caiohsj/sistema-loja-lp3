@@ -28,7 +28,7 @@ public class ProdutoView extends GenericCRUDView {
 
     @Override
     public String[] configurarCamposDeBusca() {
-        return new String[0];
+        return new String[]{"Descrição", "Marca", "Modelo", "Fornecedor", "ID"};
     }
     
     public void setVisible(boolean b) {
